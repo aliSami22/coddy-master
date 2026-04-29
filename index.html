@@ -2356,20 +2356,13 @@ function setLanguage(lang) {
     const key = el.dataset.i18nPh;
     if (dict[key] !== undefined) el.placeholder = dict[key];
   });
-
-  // Save preference
-  try { localStorage.setItem('cm_lang', lang); } catch(e) {}
 }
 
 langToggle.addEventListener('click', () => {
   setLanguage(currentLang === 'en' ? 'ar' : 'en');
 });
 
-// Load saved language
-try {
-  const saved = localStorage.getItem('cm_lang');
-  if (saved && translations[saved]) setLanguage(saved);
-} catch(e) {}
+
 
 </script>
 
