@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-theme="dark">
+<html lang="en" dir="ltr" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -69,18 +69,28 @@
   --t-slow: 700ms;
 }
 
-/* Light theme override (toggleable) */
+/* Enhanced Light Theme */
 [data-theme="light"] {
-  --bg: #faf9f6;
+  --bg: #fcfcf9;
   --bg-elev-1: #ffffff;
-  --bg-elev-2: #f3f1ec;
-  --bg-elev-3: #ebe8e1;
-  --surface-line: #e2ddd2;
-  --text-primary: #0a0a0a;
-  --text-secondary: #3a3a3a;
-  --text-muted: #767676;
+  --bg-elev-2: #f7f5f0;
+  --bg-elev-3: #f0ede6;
+  --surface-line: #e8e4db;
+  --text-primary: #121212;
+  --text-secondary: #4a4a4a;
+  --text-muted: #808080;
   --text-inverse: #ffffff;
+  --accent-glow: rgba(255, 74, 28, 0.12);
 }
+
+/* Light Mode Overrides */
+[data-theme="light"] body::before { opacity: 0.02; }
+[data-theme="light"] .nav.scrolled { background: rgba(252, 252, 249, 0.85); }
+[data-theme="light"] .viz-card { box-shadow: 0 20px 40px -12px rgba(0,0,0,0.08); }
+[data-theme="light"] .story-card { background: var(--bg-elev-1); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.04); }
+[data-theme="light"] .blog-card { box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+[data-theme="light"] .mobile-menu { background: var(--bg); }
+[data-theme="light"] .btn-ghost { background: var(--bg-elev-1); }
 
 /* =====================================================
    RESET & BASE
@@ -241,6 +251,21 @@ html[lang="ar"] .btn-arrow { transform: scaleX(-1); }
 }
 .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
+.theme-toggle {
+  width: 40px; height: 40px;
+  border: 1px solid var(--surface-line);
+  border-radius: var(--radius-full);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-primary);
+  transition: all var(--t-fast) var(--ease);
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .sun-icon { display: none; }
+[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+
 .mobile-toggle {
   display: none;
   width: 40px; height: 40px;
@@ -321,9 +346,6 @@ html[lang="ar"] .btn-arrow { transform: scaleX(-1); }
   position: relative;
   z-index: 2;
 }
-@media (max-width: 968px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
-}
 
 .hero-label {
   display: inline-flex; align-items: center; gap: 10px;
@@ -392,7 +414,6 @@ html[lang="ar"] .hero-stat .num { font-family: var(--font-ar-display); font-weig
   position: relative;
   height: 560px;
 }
-@media (max-width: 968px) { .hero-visual { height: 440px; max-width: 500px; margin: 0 auto; } }
 
 .viz-card {
   position: absolute;
@@ -741,7 +762,6 @@ html[lang="ar"] .story-quote { font-family: var(--font-ar-display); font-style: 
 .story-author-title { font-size: 12px; color: var(--text-muted); }
 
 .story-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 12px; }
-.story-stat { }
 .story-stat .n {
   font-family: var(--font-display);
   font-size: 44px;
@@ -1234,6 +1254,120 @@ html[lang="ar"] .whatsapp-tooltip { right: auto; left: 70px; }
 .viz-card-3 { animation-delay: 1.0s; }
 @keyframes vizIn { to { opacity: 1; } }
 
+/* =====================================================
+   HERO SECTION RESPONSIVE (MOBILE & TABLET)
+   Consolidated cleanup for 767px and below
+   ===================================================== */
+@media (max-width: 968px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+  .hero-visual { height: 440px; max-width: 500px; margin: 0 auto; }
+}
+
+@media (max-width: 767px) {
+  /* Layout & Section Spacing */
+  .hero {
+    padding: 100px 0 40px;
+    text-align: center;
+    min-height: auto;
+  }
+
+  .hero-grid {
+    gap: 40px;
+  }
+
+  /* Typography & Text Alignment */
+  .hero-label {
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .hero-title.display {
+    font-size: clamp(34px, 10vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  html[lang="ar"] .hero-title.display {
+    line-height: 1.4;
+  }
+
+  .hero-sub {
+    margin: 0 auto 32px;
+    font-size: 16px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* Call to Action Buttons */
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+  }
+
+  /* Stats Section */
+  .hero-stats {
+    padding-top: 30px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 480px) {
+    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  }
+
+  .hero-stat .num {
+    font-size: 30px;
+    margin-bottom: 4px;
+  }
+
+  /* Visual Cards - FIXED VISIBILITY & STACKING */
+  .hero-visual {
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    margin-top: 40px !important;
+    max-width: 100% !important;
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .viz-card {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    animation: vizFloatMobile 5s ease-in-out infinite !important;
+  }
+
+  /* Staggered animation delay */
+  .viz-card:nth-child(2) { animation-delay: 0.5s !important; }
+  .viz-card:nth-child(3) { animation-delay: 1s !important; }
+
+  @keyframes vizFloatMobile {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1258,6 +1392,10 @@ html[lang="ar"] .whatsapp-tooltip { right: auto; left: 70px; }
     </div>
 
     <div class="nav-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">AR</button>
       <a href="#contact" class="btn btn-ghost" data-i18n="nav_cta_ghost">Get Quote</a>
       <a href="https://wa.me/201005275315" target="_blank" class="btn btn-primary">
@@ -1603,61 +1741,6 @@ html[lang="ar"] .whatsapp-tooltip { right: auto; left: 70px; }
 </section>
 
 <!-- ===========================================
-     ABOUT
-=========================================== -->
-<section class="section about" id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-visual reveal">
-        <div class="about-visual-bg"></div>
-        <div class="about-visual-gradient"></div>
-        <div class="about-visual-content">
-          <div class="about-visual-tag" data-i18n="about_tag">Founder</div>
-          <div class="about-visual-name" data-i18n="about_name">Ahmed Zehery</div>
-          <div class="about-visual-role" data-i18n="about_role">Senior Accountant & Business Owner</div>
-        </div>
-      </div>
-
-      <div class="about-body reveal" data-delay="1">
-        <div class="section-eyebrow" data-i18n="about_eyebrow">About Coddy Master</div>
-        <h2 class="display section-title">
-          <span data-i18n="about_title_1">Built by someone who</span>
-          <em data-i18n="about_title_em">runs a business.</em>
-        </h2>
-        <p data-i18n="about_p1">
-          Coddy Master was founded by Ahmed Zehery — a senior accountant who also runs a Category A licensed tourism company. He lived the chaos from both sides: the accountant's side and the owner's side.
-        </p>
-        <p data-i18n="about_p2">
-          That's why Coddy Master isn't another accounting office churning out end-of-year reports. It's a technical-financial partner that combines professional accounting, modern ERP systems, and CFO-grade strategy.
-        </p>
-        <p data-i18n="about_p3">
-          We speak the owner's language. We know what keeps you up at night. And we translate it into a system you can trust.
-        </p>
-
-        <div class="about-values">
-          <div class="about-value">
-            <div class="about-value-title" data-i18n="val_1_t">Clarity</div>
-            <div class="about-value-desc" data-i18n="val_1_d">Reports a human can actually read.</div>
-          </div>
-          <div class="about-value">
-            <div class="about-value-title" data-i18n="val_2_t">Discipline</div>
-            <div class="about-value-desc" data-i18n="val_2_d">Fixed cycles. No silent months.</div>
-          </div>
-          <div class="about-value">
-            <div class="about-value-title" data-i18n="val_3_t">Technology</div>
-            <div class="about-value-desc" data-i18n="val_3_d">Automation replaces paperwork.</div>
-          </div>
-          <div class="about-value">
-            <div class="about-value-title" data-i18n="val_4_t">Partnership</div>
-            <div class="about-value-desc" data-i18n="val_4_d">We grow when you grow.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===========================================
      BLOG
 =========================================== -->
 <section class="section blog" id="blog">
@@ -1751,6 +1834,49 @@ html[lang="ar"] .whatsapp-tooltip { right: auto; left: 70px; }
         </button>
       </form>
       <div class="form-success" id="newsSuccess" data-i18n="news_ok">✓ Subscribed. Check your inbox.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================
+     ABOUT
+=========================================== -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-body reveal">
+      <div class="section-eyebrow" data-i18n="about_eyebrow">About Coddy Master</div>
+      <h2 class="display section-title">
+        <span data-i18n="about_title_1">A tech-powered</span>
+        <em data-i18n="about_title_em">financial partner.</em>
+      </h2>
+      <p data-i18n="about_p1">
+        Coddy Master is a tech-powered financial partner engineered for small and medium-sized businesses that are done guessing and ready to grow. We provide the structural foundation that SMEs and factory owners in Egypt and the Arab world need to move from chaos to control.
+      </p>
+      <p data-i18n="about_p2">
+        We are not a traditional accounting firm. We bridge the gap between compliance and strategy by combining professional outsourced accounting, Odoo ERP implementation, and Virtual CFO leadership into a single, lean, and cost-effective solution.
+      </p>
+      <p data-i18n="about_p3">
+        Most businesses struggle because they lack financial visibility — we fix that. By integrating modern automation with senior financial expertise, we turn your numbers into a powerful engine for decision-making and sustainable growth.
+      </p>
+
+      <div class="about-values">
+        <div class="about-value">
+          <div class="about-value-title" data-i18n="val_1_t">Clarity</div>
+          <div class="about-value-desc" data-i18n="val_1_d">Financial visibility & understanding</div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-title" data-i18n="val_2_t">Control</div>
+          <div class="about-value-desc" data-i18n="val_2_d">Systems & structured operations</div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-title" data-i18n="val_3_t">Efficiency</div>
+          <div class="about-value-desc" data-i18n="val_3_d">Automation & cost reduction</div>
+        </div>
+        <div class="about-value">
+          <div class="about-value-title" data-i18n="val_4_t">Partnership</div>
+          <div class="about-value-desc" data-i18n="val_4_d">Long-term growth support</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2028,6 +2154,23 @@ document.querySelectorAll('[data-share]').forEach(btn => {
 });
 
 /* =====================================================
+   THEME TOGGLE (Light <-> Dark)
+   ===================================================== */
+const themeToggle = document.getElementById('themeToggle');
+const htmlEl = document.documentElement;
+
+// Initialize theme from local storage or default to light
+const savedTheme = localStorage.getItem('theme') || 'light';
+htmlEl.setAttribute('data-theme', savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlEl.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+});
+
+/* =====================================================
    LANGUAGE TOGGLE (EN <-> AR)
    ===================================================== */
 const translations = {
@@ -2116,22 +2259,22 @@ const translations = {
     story_4_r: "Owner, Travel Agency",
 
     about_eyebrow: "About Coddy Master",
-    about_title_1: "Built by someone who",
-    about_title_em: "runs a business.",
-    about_p1: "Coddy Master was founded by Ahmed Zehery — a senior accountant who also runs a Category A licensed tourism company. He lived the chaos from both sides: the accountant's side and the owner's side.",
-    about_p2: "That's why Coddy Master isn't another accounting office churning out end-of-year reports. It's a technical-financial partner that combines professional accounting, modern ERP systems, and CFO-grade strategy.",
-    about_p3: "We speak the owner's language. We know what keeps you up at night. And we translate it into a system you can trust.",
+    about_title_1: "A tech-powered",
+    about_title_em: "financial partner.",
+    about_p1: "Coddy Master is a tech-powered financial partner engineered for small and medium-sized businesses that are done guessing and ready to grow. We provide the structural foundation that SMEs and factory owners in Egypt and the Arab world need to move from chaos to control.",
+    about_p2: "We are not a traditional accounting firm. We bridge the gap between compliance and strategy by combining professional outsourced accounting, Odoo ERP implementation, and Virtual CFO leadership into a single, lean, and cost-effective solution.",
+    about_p3: "Most businesses struggle because they lack financial visibility — we fix that. By integrating modern automation with senior financial expertise, we turn your numbers into a powerful engine for decision-making and sustainable growth.",
     about_tag: "Founder",
     about_name: "Ahmed Zehery",
     about_role: "Senior Accountant & Business Owner",
     val_1_t: "Clarity",
-    val_1_d: "Reports a human can actually read.",
-    val_2_t: "Discipline",
-    val_2_d: "Fixed cycles. No silent months.",
-    val_3_t: "Technology",
-    val_3_d: "Automation replaces paperwork.",
+    val_1_d: "Financial visibility & understanding",
+    val_2_t: "Control",
+    val_2_d: "Systems & structured operations",
+    val_3_t: "Efficiency",
+    val_3_d: "Automation & cost reduction",
     val_4_t: "Partnership",
-    val_4_d: "We grow when you grow.",
+    val_4_d: "Long-term growth support",
 
     blog_eyebrow: "Insights & Articles",
     blog_title_1: "What we write about when",
@@ -2267,22 +2410,22 @@ const translations = {
     story_4_r: "صاحب شركة سياحة",
 
     about_eyebrow: "عن كودي ماستر",
-    about_title_1: "اتبنى بإيد حد",
-    about_title_em: "بيدير شركة.",
-    about_p1: "كودي ماستر أسسها أحمد زهيري — محاسب محترف وفي نفس الوقت صاحب شركة سياحة مرخصة فئة أ. عاش الفوضى من الاتجاهين: اتجاه المحاسب، واتجاه صاحب الشركة.",
-    about_p2: "عشان كده كودي ماستر مش مكتب محاسبة تاني بيطلع تقارير آخر السنة. ده شريك مالي تقني بيجمع بين المحاسبة الاحترافية، أنظمة ERP الحديثة، وفكر مدير مالي على مستوى عالي.",
-    about_p3: "احنا بنتكلم لغة صاحب الشركة. بنعرف اللي بيقلقك في الليل. وبنترجمه لنظام تقدر تثق فيه.",
+    about_title_1: "شريك مالي",
+    about_title_em: "مدعوم بالتكنولوجيا.",
+    about_p1: "كودي ماستر هي شريك مالي مدعوم بالتكنولوجيا، صُممت خصيصاً للشركات الصغيرة والمتوسطة التي تسعى للنمو المبني على الحقائق لا التخمين. نحن نضع الأساس الهيكلي الذي يحتاجه أصحاب الشركات والمصانع في مصر والوطن العربي للانتقال من الفوضى إلى التحكم الكامل.",
+    about_p2: "نحن لسنا مكتب محاسبة تقليدي؛ بل جسر يربط بين الالتزام الضريبي والاستراتيجية المالية. نجمع بين المحاسبة الخارجية الاحترافية، وتركيب أنظمة Odoo ERP، وقيادة المدير المالي الافتراضي في حل واحد مرن وفعال من حيث التكلفة.",
+    about_p3: "تعاني معظم الشركات بسبب غياب الرؤية المالية — ونحن هنا لنعالج ذلك. من خلال دمج الأتمتة الحديثة مع الخبرة المالية العميقة، نحول أرقامك إلى محرك قوي لاتخاذ قرارات حاسمة وتحقيق نمو مستدام.",
     about_tag: "المؤسس",
     about_name: "أحمد زهيري",
     about_role: "محاسب محترف وصاحب شركة",
-    val_1_t: "وضوح",
-    val_1_d: "تقارير إنسان فعلاً يقدر يفهمها.",
-    val_2_t: "انضباط",
-    val_2_d: "مواعيد ثابتة. مفيش شهور صامتة.",
-    val_3_t: "تكنولوجيا",
-    val_3_d: "أتمتة بدل الأوراق.",
-    val_4_t: "شراكة",
-    val_4_d: "احنا بنكبر لما أنت بتكبر.",
+    val_1_t: "الوضوح",
+    val_1_d: "رؤية مالية شاملة وفهم عميق للأرقام",
+    val_2_t: "التحكم",
+    val_2_d: "أنظمة تشغيلية منظمة وإدارة محكمة",
+    val_3_t: "الكفاءة",
+    val_3_d: "أتمتة العمليات وتقليل التكاليف المهدرة",
+    val_4_t: "الشراكة",
+    val_4_d: "دعم استراتيجي لنمو أعمالك على المدى الطويل",
 
     blog_eyebrow: "مقالات ورؤى",
     blog_title_1: "بنكتب عن إيه لما",
