@@ -477,13 +477,15 @@
         right: 0;
         bottom: 0;
         background: var(--bg);
-        padding: 100px 32px 40px;
+        padding: 80px 32px 60px;
         transform: translateX(100%);
         transition: transform var(--t-med) var(--ease);
         z-index: 99;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
       html[lang="ar"] .mobile-menu {
         transform: translateX(-100%);
@@ -493,17 +495,17 @@
       }
       .mobile-menu .nav-link {
         display: block;
-        padding: 14px 0;
-        font-size: 20px;
+        padding: 12px 0;
+        font-size: 18px;
         font-weight: 700;
         border-bottom: 1px solid var(--surface-line);
       }
       .mobile-menu .mobile-actions {
-        margin-top: auto;
+        margin-top: 20px;
         padding-top: 20px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
       }
 
       /* =====================================================
@@ -3993,18 +3995,18 @@
           story_2_tag: "Retail Chain · Cairo",
           story_2_q:
             '"Our old accountant used to send reports 40 days late. Now I open my phone every morning and see yesterday\'s sales per branch."',
-          story_2_a: "نور أ.",
-          story_2_r: "مديرة تنفيذية، 12 فرع F&B",
+          story_2_a: "Nour A.",
+          story_2_r: "CEO, 12-branch F&B",
           story_3_tag: "E-commerce · Alexandria",
           story_3_q:
             '"Our Virtual CFO spotted a pricing mistake costing us 210K EGP per quarter. Paid for the service 10x over in one meeting."',
-          story_3_a: "عمر ح.",
-          story_3_r: "مؤسس مشارك، براند DTC",
+          story_3_a: "Omar H.",
+          story_3_r: "Co-founder, DTC Brand",
           story_4_tag: "Tourism · Hurghada",
           story_4_q:
             '"Tax season used to be a nightmare. Now it\'s a report I review, sign, and move on. That alone is worth it."',
-          story_4_a: "كريم م.",
-          story_4_r: "صاحب شركة سياحة",
+          story_4_a: "Karim M.",
+          story_4_r: "Owner, Travel Agency",
 
           about_eyebrow: "About Coddy Master",
           about_title_1: "A tech-powered",
